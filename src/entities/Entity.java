@@ -122,6 +122,11 @@ public abstract class Entity {
 				return ent.isSolid;
 			}
 		}
+		for(Entity ent : GameState.currentManager.getPuzzleTiles()){
+			if(this.bounds.intersects(ent.getBounds()) && ent != this){
+				return ent.isSolid;
+			}
+		}
 		if(this.collidesWith(GameState.player) && !this.equals(GameState.player))
 			return true;
 		return false;

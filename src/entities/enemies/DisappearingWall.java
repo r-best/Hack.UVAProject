@@ -33,7 +33,6 @@ public class DisappearingWall extends Entity{
 	@Override
 	public void update() {
 		super.update();
-		System.out.println(collidesWith(GameState.player));
 	}
 
 	@Override

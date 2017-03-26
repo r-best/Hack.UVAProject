@@ -119,7 +119,7 @@ public class Player extends Entity{
 			GameState.currentManager.addEffect(new Effect(this.x/32, this.y/32, Assets.getEntityAnimation("jump"), 750));
 			this.setXInPixels((float) (mouse.x - Game.getWindowX() - Camera.getXOffset()));
 			this.setYInPixels((float) (mouse.y - Game.getWindowY() - Camera.getYOffset()));
-			//spendEnergy(cost);
+			spendEnergy(cost);
 		}
 	}
 

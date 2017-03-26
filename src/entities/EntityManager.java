@@ -16,14 +16,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import puzzles.PressureTileSet;
 
 public class EntityManager{
 	private ArrayList<Entity> entities;
 	private ArrayList<Effect> effects;
+	private ArrayList<PressureTileSet.Tile> puzzleTiles;
 
 	public EntityManager(int roomNum){
 		entities = new ArrayList<>();
 		effects = new ArrayList<>();
+		puzzleTiles = new ArrayList<>();
 		initializeEntities(roomNum);
 	}
 
@@ -32,6 +35,8 @@ public class EntityManager{
 			e.update();
 		for(Effect e : effects)
 			e.update();
+		for(PressureTileSet.Tile e : puzzleTiles)
+			e.update();
 	}
 
 	public void draw(Graphics2D graphics){
@@ -39,22 +44,27 @@ public class EntityManager{
 			e.draw(graphics);
 		for(Effect e : effects)
 			e.draw(graphics);
+		for(PressureTileSet.Tile e : puzzleTiles)
+			e.draw(graphics);
 	}
 
 	public void addEntity(Entity ent){
 		entities.add(ent);
 	}
 	public void addEffect(Effect eff){ effects.add(eff); }
+	public void addPuzzleTile(PressureTileSet.Tile tile){ puzzleTiles.add(tile); }
 
 	public void removeEntity(Entity ent){
 		entities.remove(ent);
 	}
 	public void removeEffect(Effect eff){ effects.remove(eff); }
+	public void removePuzzleTile(PressureTileSet.Tile tile){ puzzleTiles.remove(tile); }
 
 	public ArrayList<Entity> getEntities(){
 		return entities;
 	}
 	public ArrayList<Effect> getEffects(){ return effects; }
+	public ArrayList<PressureTileSet.Tile> getPuzzleTiles(){ return puzzleTiles; }
 
 	public void generateRoom(int difficulty){
 		Random r = new Random();
@@ -164,7 +174,6 @@ public class EntityManager{
 						);
 						addEntity(controller);
 						NodeList nodes = entity.getElementsByTagName("vanishwall");
-						System.out.println(nodes.getLength());
 						for(int j = 0; j < nodes.getLength(); j++){
 							DisappearingWall temp = new DisappearingWall(
 									Integer.parseInt(((Element)nodes.item(j)).getAttribute("x")),
@@ -175,6 +184,13 @@ public class EntityManager{
 						break;
 					case "levelChanger":
 						addEntity(new LevelChanger(
+								Integer.parseInt(entity.getAttribute("x")),
+								Integer.parseInt(entity.getAttribute("y")),
+								Integer.parseInt(entity.getAttribute("dest"))
+						));
+						break;
+					case "pressureTilePuzzle":
+						addEntity(new PressureTileSet(
 								Integer.parseInt(entity.getAttribute("x")),
 								Integer.parseInt(entity.getAttribute("y"))
 						));

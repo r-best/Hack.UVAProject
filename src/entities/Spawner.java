@@ -47,10 +47,10 @@ public class Spawner{
 	 */
 	public void spawn(){
 		Random r = new Random();
-		int chance = r.nextInt();
-		if(chance < 50)
+		int chance = r.nextInt() % 100;
+		if(chance < 40)
 			GameState.currentManager.addEntity(new Chaser(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
-		else if(chance >= 50 && chance < 80)
+		else if(chance >= 40 && chance < 85)
 			GameState.currentManager.addEntity(new FastEnemy(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
 		else
 			GameState.currentManager.addEntity(new Turret(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));

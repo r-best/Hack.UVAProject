@@ -9,9 +9,12 @@ import java.awt.*;
  * Created by Bobby on 3/26/2017.
  */
 public class LevelChanger extends Entity{
-	public LevelChanger(float x, float y) {
+	private int destRoom;
+
+	public LevelChanger(float x, float y, int destRoom) {
 		super(x, y, Assets.getEntityAnimation("teleporter"));
 		isSolid = false;
+		this.destRoom = destRoom;
 	}
 
 	@Override
@@ -19,7 +22,7 @@ public class LevelChanger extends Entity{
 		super.update();
 
 		if(collidesWith(GameState.player)) {
-			GameState.currentManager = new EntityManager(++GameState.currentRoomNum);
+			GameState.currentManager = new EntityManager(destRoom);
 			GameState.player.moveTo(2, 2);
 		}
 	}

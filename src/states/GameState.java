@@ -13,14 +13,12 @@ import utilities.KeyManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Ellipse2D;
 
 /**
  * Created by Bobby on 3/25/2017.
  */
 public class GameState implements State{
 
-	public static int currentRoomNum;
 	public static EntityManager currentManager;
 	public static Player player;
 	public static boolean frozen;
@@ -29,8 +27,7 @@ public class GameState implements State{
 
 	public GameState(){
 		player = new Player(1, 1);
-		currentRoomNum = 1;
-		currentManager = new EntityManager(currentRoomNum);
+		currentManager = new EntityManager(1);
 
 		healthMeter = new Rectangle(
 				(int)(Game.getGameWidth()*.01),
