@@ -1,6 +1,7 @@
 package entities;
 
 import entities.enemies.Chaser;
+import entities.enemies.FastEnemy;
 import entities.enemies.Turret;
 import states.GameState;
 
@@ -46,9 +47,13 @@ public class Spawner{
 	 */
 	public void spawn(){
 		Random r = new Random();
-		if(r.nextInt() < 80)
+		int chance = r.nextInt();
+		if(chance < 50)
 			GameState.currentManager.addEntity(new Chaser(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
+		else if(chance >= 50 && chance < 80)
+			GameState.currentManager.addEntity(new FastEnemy(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
 		else
 			GameState.currentManager.addEntity(new Turret(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
+
 	}
 }
