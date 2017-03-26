@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class LevelChanger extends Entity{
 	public LevelChanger(float x, float y) {
-		super(x, y, Assets.getEntityAnimation("levelChanger"));
+		super(x, y, Assets.getEntityAnimation("teleporter"));
 		isSolid = false;
 	}
 
