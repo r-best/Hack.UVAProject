@@ -16,7 +16,7 @@ public abstract class Entity {
 
 	public static final int DEFAULT_WIDTH = 50, DEFAULT_HEIGHT = 50;
 	protected double XSpd, YSpd;
-	protected Animation anim;
+	public Animation anim;
 	protected BufferedImage tempAnim, currentFrame;
 	public int boundsXOffset, boundsYOffset; //used to shrink the bounds Rectangle into the entity, to reduce the size of the hitbox
 
@@ -24,7 +24,7 @@ public abstract class Entity {
 	 * @param x starting X position in tiles
 	 * @param y starting Y position in tiles
 	 */
-	public Entity(int x, int y, int width, int height, Animation anim){
+	public Entity(float x, float y, int width, int height, Animation anim){
 		this.x = x * Assets.tilesize;
 		this.y = y * Assets.tilesize;
 		this.width = width;
@@ -35,7 +35,7 @@ public abstract class Entity {
 		this.anim = anim;
 		tempAnim = this.anim.getFrame(0);
 	}
-	public Entity(int x, int y, Animation anim){
+	public Entity(float x, float y, Animation anim){
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, anim);
 	}
 

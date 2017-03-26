@@ -10,8 +10,8 @@ public class Camera{
 	private static float xoffset, yoffset;
 
 	public static void centerOnEntity(Entity ent){
-		xoffset =  Game.getGameWidth() / 2 - ent.getWidth() / 2 - ent.getXInPixels();
-		yoffset =  Game.getGameHeight() / 2 - ent.getHeight() / 2 - ent.getYInPixels();
+		xoffset =  Game.getGameWidth() / 2 - ent.anim.getFrame(0).getWidth() / 2 - ent.getXInPixels();
+		yoffset =  Game.getGameHeight() / 2 - ent.anim.getFrame(0).getHeight() / 2 - ent.getYInPixels();
 	}
 
 	public void move(float x, float y){

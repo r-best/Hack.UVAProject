@@ -3,6 +3,7 @@ package states;
 import HackUVAProject.Game;
 import entities.EntityManager;
 import entities.Player;
+import entities.Spawner;
 import graphics.Camera;
 import utilities.KeyManager;
 
@@ -19,21 +20,31 @@ public class GameState implements State{
 	public static Player player;
 	public static boolean frozen;
 
-	private Rectangle energyMeter, energyMeterFill, energyPreview;
+	private Rectangle healthMeter, healthMeterFill, energyMeter, energyMeterFill, energyPreview;
 
 	public GameState(){
 		player = new Player(1, 1);
 		currentRoomNum = 0;
 		currentManager = new EntityManager(1);
 
-		energyMeter = new Rectangle(
+		healthMeter = new Rectangle(
 				(int)(Game.getGameWidth()*.01),
+				(int)(Game.getGameHeight()*.01),
+				(int)(Game.getGameWidth()*.05),
+				(int)(Game.getGameHeight()*.98)
+		);
+		healthMeterFill = new Rectangle(healthMeter);
+
+		energyMeter = new Rectangle(
+				(int)(Game.getGameWidth()*.07),
 				(int)(Game.getGameHeight()*.01),
 				(int)(Game.getGameWidth()*.05),
 				(int)(Game.getGameHeight()*.98)
 		);
 		energyMeterFill = new Rectangle(energyMeter);
 		energyPreview = new Rectangle(energyMeter);
+
+		new Spawner();
 	}
 
 	@Override
@@ -46,6 +57,8 @@ public class GameState implements State{
 		else
 			frozen = false;
 		player.update();
+
+		healthMeterFill.setBounds(healthMeterFill.x, healthMeter.y+(int)(healthMeter.height*((100-player.getHealth()))/100), healthMeterFill.width, (int)(healthMeter.height*(player.getHealth()/100)));
 
 		energyMeterFill.setBounds(energyMeterFill.x, energyMeter.y+(int)(energyMeter.height*((100-player.getEnergy())/100)), energyMeterFill.width, (int)(energyMeter.height*(player.getEnergy()/100)));
 		energyPreview.setBounds(energyPreview.x, energyMeterFill.y, energyPreview.width, (int)(energyMeter.height*(player.estimateJumpCost()/100)));
@@ -60,8 +73,11 @@ public class GameState implements State{
 
 		g.setColor(Color.white);
 		g.draw(energyMeter);
+		g.draw(healthMeter);
 		g.setColor(Color.cyan);
 		g.fill(energyMeterFill);
+		g.setColor(Color.green);
+		g.fill(healthMeterFill);
 		g.setColor(Color.red);
 		g.fill(energyPreview);
 	}

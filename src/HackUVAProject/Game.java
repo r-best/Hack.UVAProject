@@ -49,7 +49,8 @@ public class Game extends Canvas{
 
 		Assets.init();
 
-		StateManager.setState(new GameState());
+		StateManager.gameState = new GameState();
+		StateManager.setState(StateManager.gameState);
 
 		new Timer(33, new ActionListener() {
 			@Override

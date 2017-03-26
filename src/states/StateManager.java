@@ -8,6 +8,8 @@ import java.awt.*;
 public class StateManager{
 	private static State currentState;
 
+	public static GameState gameState;
+
 	public static void setState(State state){
 		currentState = state;
 	}
