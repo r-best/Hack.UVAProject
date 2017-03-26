@@ -1,7 +1,6 @@
 package entities.enemies;
 
 import entities.Entity;
-import entities.Player;
 import graphics.Animation;
 import states.GameState;
 

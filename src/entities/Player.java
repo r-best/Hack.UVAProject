@@ -9,11 +9,13 @@ import states.GameOverState;
 import states.GameState;
 import entities.effects.Effect;
 import states.StateManager;
+import utilities.KeyManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Player extends Entity{
@@ -75,6 +77,9 @@ public class Player extends Entity{
 		if(energyPercentage < 100)
 			energyPercentage += .2;
 
+		if(KeyManager.checkKeyAndReset(KeyEvent.VK_E))
+			jump();
+
 		move();
 	}
 
@@ -111,10 +116,10 @@ public class Player extends Entity{
 		double cost = estimateJumpCost();
 
 		if(cost < energyPercentage) {
-			GameState.currentManager.addEntity(new Effect(this.x/32, this.y/32, Assets.getEntityAnimation("jump"), 1000));
+			GameState.currentManager.addEffect(new Effect(this.x/32, this.y/32, Assets.getEntityAnimation("jump"), 750));
 			this.setXInPixels((float) (mouse.x - Game.getWindowX() - Camera.getXOffset()));
 			this.setYInPixels((float) (mouse.y - Game.getWindowY() - Camera.getYOffset()));
-			spendEnergy(cost);
+			//spendEnergy(cost);
 		}
 	}
 

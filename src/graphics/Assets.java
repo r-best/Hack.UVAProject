@@ -54,7 +54,7 @@ public class Assets {
 					BufferedImage spriteSheet = loadImage(f.getPath().substring(3).replace('\\', '/'));
 					if(spriteSheet.getWidth() >= tilesize) {
 						BufferedImage[] sprites = new BufferedImage[1];
-						sprites[0] = spriteSheet.getSubimage(0, 0, tilesize, tilesize);
+						sprites[0] = spriteSheet.getSubimage(0, 0, spriteSheet.getWidth(), spriteSheet.getHeight());
 						entityAnims.put(f.getName().substring(0, f.getName().length() - 4), new Animation(sprites));
 					}
 				}

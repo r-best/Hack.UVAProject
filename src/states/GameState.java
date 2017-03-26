@@ -28,8 +28,8 @@ public class GameState implements State{
 
 	public GameState(){
 		player = new Player(1, 1);
-		currentRoomNum = 0;
-		currentManager = new EntityManager(1);
+		currentRoomNum = 1;
+		currentManager = new EntityManager(currentRoomNum);
 
 		healthMeter = new Rectangle(
 				(int)(Game.getGameWidth()*.01),

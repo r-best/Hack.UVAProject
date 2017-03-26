@@ -173,6 +173,12 @@ public class EntityManager{
 							addEntity(temp);
 						}
 						break;
+					case "levelChanger":
+						addEntity(new LevelChanger(
+								Integer.parseInt(entity.getAttribute("x")),
+								Integer.parseInt(entity.getAttribute("y"))
+						));
+						break;
 					default:
 						break;
 				}
