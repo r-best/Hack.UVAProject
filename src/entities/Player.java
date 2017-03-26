@@ -2,8 +2,11 @@ package entities;
 
 import HackUVAProject.Game;
 import graphics.Assets;
+import graphics.Camera;
+import utilities.KeyManager;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Player extends Entity{
 
@@ -18,12 +21,24 @@ public class Player extends Entity{
 		super.update();
 		setPlayerMovement();
 		currentFrame = anim.getCurrentFrame();
+
+		if(KeyManager.checkKeyAndReset(KeyEvent.VK_E)){
+			jump();
+		}
+
 		move();
 	}
 
 	@Override
 	public void draw(Graphics2D graphics) {
 		super.draw(graphics);
+	}
+
+	public void jump(){
+		Point mouse = MouseInfo.getPointerInfo().getLocation();
+
+		setXInPixels((float)(mouse.x - Game.getWindowX() - Camera.getXOffset()));
+		setYInPixels((float)(mouse.y - Game.getWindowY() - Camera.getYOffset()));
 	}
 
 	/**

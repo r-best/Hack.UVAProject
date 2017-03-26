@@ -4,11 +4,14 @@ import graphics.Assets;
 import states.GameState;
 import states.StateManager;
 import utilities.KeyManager;
+import utilities.MouseManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
@@ -42,6 +45,7 @@ public class Game extends Canvas{
 
 	public void Init() throws IOException, FontFormatException {
 		frame.addKeyListener(KeyManager.getInstance());
+		frame.addMouseListener(MouseManager.getInstance());
 
 		Assets.init();
 
