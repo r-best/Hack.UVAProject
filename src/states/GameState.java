@@ -5,10 +5,14 @@ import entities.EntityManager;
 import entities.Player;
 import entities.Spawner;
 import graphics.Camera;
+import java.awt.Shape;
+
+import javafx.scene.shape.Circle;
 import utilities.KeyManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
 
 /**
  * Created by Bobby on 3/25/2017.
@@ -71,10 +75,15 @@ public class GameState implements State{
 		currentManager.draw(g);
 		player.draw(g);
 
+		Point mouse = MouseInfo.getPointerInfo().getLocation();
+
+		g.setColor(Color.black);
+		g.drawLine(Game.getGameWidth()/2, Game.getGameHeight()/2, (int)(mouse.getX()-Game.getWindowX()), (int)(mouse.getY()-Game.getWindowY()-50));
+
 		g.setColor(Color.white);
 		g.draw(energyMeter);
 		g.draw(healthMeter);
-		g.setColor(Color.cyan);
+		g.setColor(Color.blue);
 		g.fill(energyMeterFill);
 		g.setColor(Color.green);
 		g.fill(healthMeterFill);

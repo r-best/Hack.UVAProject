@@ -14,17 +14,23 @@ import java.util.Random;
  */
 public class Spawner{
 
+	public static int minX, maxX, minY, maxY;
+
 	private Timer timer;
 
 	public Spawner(){
-		timer = new Timer(5000, new ActionListener() {
+		minX = -50;
+		maxX = 50;
+		minY = -50;
+		maxY = 50;
+
+		timer = new Timer(2000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				spawn();
 			}
 		});
 		timer.start();
-
 
 		new Timer(2000, new ActionListener() {
 			@Override
@@ -41,8 +47,8 @@ public class Spawner{
 	public void spawn(){
 		Random r = new Random();
 		if(r.nextInt() < 80)
-			GameState.currentManager.addEntity(new Chaser(r.nextInt(50 + 1 + 50) - 50, r.nextInt(50 + 1 + 50) - 50));
+			GameState.currentManager.addEntity(new Chaser(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
 		else
-			GameState.currentManager.addEntity(new Turret(r.nextInt(50 + 1 + 50) - 50, r.nextInt(50 + 1 + 50) - 50));
+			GameState.currentManager.addEntity(new Turret(r.nextInt(maxX + 1 - minX) + minX, r.nextInt(maxY + 1 - minY) + minY));
 	}
 }

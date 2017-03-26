@@ -76,7 +76,7 @@ public class Game extends Canvas{
 		graphics.clearRect(0, 0, Width, Height);
 
 		//Color Background
-		graphics.setColor(Color.white);
+		graphics.setColor(Color.cyan);
 		graphics.fillRect(0, 0, Width, Height);
 
 		//Begin Draw

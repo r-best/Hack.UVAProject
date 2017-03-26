@@ -8,6 +8,6 @@ import graphics.Assets;
  */
 public class Wall extends Entity{
 	public Wall(int x, int y) {
-		super(x, y, Assets.getEntityAnimation("grass"));
+		super(x, y, Assets.getEntityAnimation("wall"));
 	}
 }

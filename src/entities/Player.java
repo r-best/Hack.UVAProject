@@ -2,6 +2,7 @@ package entities;
 
 import HackUVAProject.Game;
 import entities.enemies.Chaser;
+import graphics.Animation;
 import graphics.Assets;
 import graphics.Camera;
 import states.GameOverState;
@@ -35,11 +36,12 @@ public class Player extends Entity{
 		new Timer(200, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Animation anim = Assets.getEntityAnimation("trail");
 				GameState.currentManager.addEffect(
 						new Effect(
-								((GameState.player.x+GameState.player.getWidth()/2)/32),
-								((GameState.player.y+GameState.player.getHeight()/2)/32),
-								Assets.getEntityAnimation("trail"),
+								((GameState.player.x+GameState.player.getWidth()/2-anim.getFrame(0).getWidth()/2)/32),
+								((GameState.player.y+GameState.player.getHeight()/2-anim.getFrame(0).getHeight()/2)/32),
+								anim,
 								2000)
 				);
 			}
@@ -77,7 +79,7 @@ public class Player extends Entity{
 	}
 
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(Graphics2D graphics){
 		super.draw(graphics);
 	}
 
@@ -129,7 +131,7 @@ public class Player extends Entity{
 	}
 
 	public void freeze(){
-		if(spendEnergy(2.5))
+		if(spendEnergy(1))
 			if(!GameState.isFrozen())
 				GameState.frozen = true;
 	}

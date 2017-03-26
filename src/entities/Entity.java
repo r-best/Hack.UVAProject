@@ -27,8 +27,8 @@ public abstract class Entity {
 	public Entity(float x, float y, int width, int height, Animation anim){
 		this.x = x * Assets.tilesize;
 		this.y = y * Assets.tilesize;
-		this.width = width;
-		this.height = height;
+		this.width = anim.getFrame(0).getWidth();
+		this.height = anim.getFrame(0).getHeight();
 		boundsXOffset = (int)(this.width*.3);
 		boundsYOffset = (int)(this.height*.3);
 		bounds = new Rectangle((int)(this.x + boundsXOffset), (int)(this.y + boundsYOffset), (int)(this.width*.4), (int)(this.height*.6));
