@@ -1,1 +1,11 @@
-write stuff here later
+# README
+========
+A simple puzzle based game; you have the ability to teleport short distances and stop time, 
+however both of these actions consume energy, which slowly regenerates over time.
+
+The game will start slowly, but the longer you play the faster enemies will start to appear; the goal
+is to reach the end of the level before you are overwhelmed. In the time I had I was only able to 
+implement two types of enemies: one that chases you around and another that stays stationary and
+fires projectiles in your direction.
+
+In time I should be able to implement a larger variety of enemies and challenges, as well as more interesting puzzles.
