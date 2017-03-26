@@ -9,8 +9,6 @@ import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import graphics.Animation;
 import graphics.Assets;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +17,6 @@ import org.xml.sax.SAXException;
 
 public class EntityManager{
 	private ArrayList<Entity> entities;
-	private boolean frozen = false;
 
 	public EntityManager(int roomNum){
 		entities = new ArrayList<>();
@@ -27,9 +24,8 @@ public class EntityManager{
 	}
 
 	public void update(){
-		if(!frozen)
-			for(Entity e : entities)
-				e.update();
+		for(Entity e : entities)
+			e.update();
 	}
 
 	public void draw(Graphics2D graphics){
@@ -70,8 +66,7 @@ public class EntityManager{
 					case "wall":
 						addEntity(new Wall(
 								Integer.parseInt(entity.getAttribute("x")),
-								Integer.parseInt(entity.getAttribute("y")),
-								Assets.getEntityAnimation(entity.getAttribute("sprite"))
+								Integer.parseInt(entity.getAttribute("y"))
 						));
 						break;
 					default:

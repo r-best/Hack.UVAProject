@@ -3,6 +3,7 @@ package entities;
 import HackUVAProject.Game;
 import graphics.Assets;
 import graphics.Camera;
+import states.GameState;
 import utilities.KeyManager;
 
 import java.awt.*;
@@ -10,10 +11,10 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entity{
 
+	private double energyPercentage = 100;
+
 	public Player(int x, int y) {
 		super(x, y, Assets.getEntityAnimation("player"));
-
-
 	}
 
 	@Override
@@ -22,9 +23,8 @@ public class Player extends Entity{
 		setPlayerMovement();
 		currentFrame = anim.getCurrentFrame();
 
-		if(KeyManager.checkKeyAndReset(KeyEvent.VK_E)){
-			jump();
-		}
+		if(energyPercentage < 100)
+			energyPercentage += .2;
 
 		move();
 	}
@@ -36,9 +36,32 @@ public class Player extends Entity{
 
 	public void jump(){
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
+		double cost = estimateJumpCost();
 
-		setXInPixels((float)(mouse.x - Game.getWindowX() - Camera.getXOffset()));
-		setYInPixels((float)(mouse.y - Game.getWindowY() - Camera.getYOffset()));
+		if(cost < energyPercentage) {
+			setXInPixels((float) (mouse.x - Game.getWindowX() - Camera.getXOffset()));
+			setYInPixels((float) (mouse.y - Game.getWindowY() - Camera.getYOffset()));
+			energyPercentage -= cost;
+		}
+	}
+
+	public double estimateJumpCost(){
+		Point mouse = MouseInfo.getPointerInfo().getLocation();
+
+		double xDistance = mouse.x - Game.getWindowX() - Camera.getXOffset() - this.x;
+		double yDistance = mouse.y - Game.getWindowY() - Camera.getYOffset() - this.y;
+		double jumpDistance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+		double unitJumpDistance = Math.sqrt(Math.pow(Game.getGameWidth(), 2) + Math.pow(Game.getGameHeight(), 2)) / 4; //This far of a jump costs 30% of energy, used to determine other costs
+
+		return Math.min(energyPercentage, (jumpDistance / unitJumpDistance) * 30);
+	}
+
+	public void freeze(){
+		if(!GameState.isFrozen())
+			GameState.frozen = true;
+
+		energyPercentage -= 1;
 	}
 
 	/**
@@ -60,4 +83,6 @@ public class Player extends Entity{
 		XSpd = mouseX / ratio;
 		YSpd = mouseY / ratio;
 	}
+
+	public double getEnergy(){ return energyPercentage; }
 }

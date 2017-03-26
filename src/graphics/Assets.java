@@ -34,13 +34,11 @@ public class Assets {
 					loadAnimations(f.getPath());
 				if(f.getName().endsWith(".png") || f.getName().endsWith(".jpg")){
 					BufferedImage spriteSheet = loadImage(f.getPath().substring(3).replace('\\', '/'));
-					if(spriteSheet.getWidth() >= tilesize*4) {
-						BufferedImage[] sprites = new BufferedImage[4];
-						for (int i = 0; i < 4; i++) {
-							sprites[i] = spriteSheet.getSubimage(tilesize, tilesize * i, tilesize, tilesize);
-						}
-						entityAnims.put(f.getName().substring(0, f.getName().length() - 4), new Animation(sprites));
+					BufferedImage[] sprites = new BufferedImage[4];
+					for (int i = 0; i < 4; i++) {
+						sprites[i] = spriteSheet.getSubimage((spriteSheet.getWidth()/4) * i, 0, spriteSheet.getWidth()/4, spriteSheet.getHeight()/4);
 					}
+					entityAnims.put(f.getName().substring(0, f.getName().length() - 4), new Animation(sprites));
 				}
 			}
 		}

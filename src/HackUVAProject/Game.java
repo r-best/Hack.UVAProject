@@ -45,7 +45,7 @@ public class Game extends Canvas{
 
 	public void Init() throws IOException, FontFormatException {
 		frame.addKeyListener(KeyManager.getInstance());
-		frame.addMouseListener(MouseManager.getInstance());
+		this.addMouseListener(MouseManager.getInstance());
 
 		Assets.init();
 
@@ -75,7 +75,7 @@ public class Game extends Canvas{
 		graphics.clearRect(0, 0, Width, Height);
 
 		//Color Background
-		graphics.setColor(Color.BLACK);
+		graphics.setColor(Color.white);
 		graphics.fillRect(0, 0, Width, Height);
 
 		//Begin Draw

@@ -20,15 +20,13 @@ public abstract class Entity {
 	protected BufferedImage tempAnim, currentFrame;
 	public int boundsXOffset, boundsYOffset; //used to shrink the bounds Rectangle into the entity, to reduce the size of the hitbox
 
-	protected ArrayList<Event> events; //What happens when the player interacts with this entity
-
 	/**
 	 * @param x starting X position in tiles
 	 * @param y starting Y position in tiles
 	 */
 	public Entity(int x, int y, int width, int height, Animation anim){
-		this.x = x * 32;
-		this.y = y * 32;
+		this.x = x * Assets.tilesize;
+		this.y = y * Assets.tilesize;
 		this.width = width;
 		this.height = height;
 		boundsXOffset = (int)(this.width*.3);
@@ -36,17 +34,9 @@ public abstract class Entity {
 		bounds = new Rectangle((int)(this.x + boundsXOffset), (int)(this.y + boundsYOffset), (int)(this.width*.4), (int)(this.height*.6));
 		this.anim = anim;
 		tempAnim = this.anim.getFrame(0);
-		events = new ArrayList<>();
 	}
 	public Entity(int x, int y, Animation anim){
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, anim);
-	}
-	public Entity(int x, int y, Animation anim, ArrayList<Event> events){
-		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, anim);
-		if(events != null)
-			this.events = events;
-		else
-			this.events = new ArrayList<>();
 	}
 
 	public void update(){
