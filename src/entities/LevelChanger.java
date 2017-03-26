@@ -1,10 +1,7 @@
 package entities;
 
-import entities.Entity;
-import graphics.Animation;
 import graphics.Assets;
 import states.GameState;
-import states.StateManager;
 
 import java.awt.*;
 
