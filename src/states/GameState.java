@@ -8,6 +8,7 @@ import graphics.Camera;
 import java.awt.Shape;
 
 import javafx.scene.shape.Circle;
+import sun.plugin2.util.ColorUtil;
 import utilities.KeyManager;
 
 import java.awt.*;
@@ -72,6 +73,11 @@ public class GameState implements State{
 
 	@Override
 	public void draw(Graphics2D g) {
+		//Colors
+		Color darkGreen = new Color(30,128,30);
+		Color darkRed = new Color(128,30,30);
+		Color darkBlue = new Color(30,30,128);
+
 		currentManager.draw(g);
 		player.draw(g);
 
@@ -83,12 +89,34 @@ public class GameState implements State{
 		g.setColor(Color.white);
 		g.draw(energyMeter);
 		g.draw(healthMeter);
-		g.setColor(Color.blue);
+		//Energy Gradient
+		GradientPaint energy = new GradientPaint(0,0, darkBlue,60, 0,Color.blue, true);
+		g.setPaint(energy);
 		g.fill(energyMeterFill);
-		g.setColor(Color.green);
-		g.fill(healthMeterFill);
-		g.setColor(Color.red);
+		GradientPaint energyPreviewFill = new GradientPaint(0,0, darkRed,60, 0,Color.red, true);
+		g.setPaint(energyPreviewFill);
 		g.fill(energyPreview);
+		//Health Gradient
+		GradientPaint health = new GradientPaint(0,0, darkGreen,60, 0,Color.green, true);
+		g.setPaint(health);
+		g.fill(healthMeterFill);
+		//HEALTH label
+		g.setColor(Color.white);
+		g.setFont(g.getFont().deriveFont(80f));
+		g.drawString("H", (int)healthMeter.getX()+10, (int)healthMeter.getY()+300);
+		g.drawString("E", (int)healthMeter.getX()+10, (int)healthMeter.getY()+390);
+		g.drawString("A", (int)healthMeter.getX()+10, (int)healthMeter.getY()+480);
+		g.drawString("L", (int)healthMeter.getX()+10, (int)healthMeter.getY()+570);
+		g.drawString("T", (int)healthMeter.getX()+10, (int)healthMeter.getY()+660);
+		g.drawString("H", (int)healthMeter.getX()+10, (int)healthMeter.getY()+750);
+		//ENERGY label
+		g.drawString("E", (int)energyMeter.getX()+10, (int)energyMeter.getY()+300);
+		g.drawString("N", (int)energyMeter.getX()+10, (int)energyMeter.getY()+390);
+		g.drawString("E", (int)energyMeter.getX()+10, (int)energyMeter.getY()+480);
+		g.drawString("R", (int)energyMeter.getX()+10, (int)energyMeter.getY()+570);
+		g.drawString("G", (int)energyMeter.getX()+10, (int)energyMeter.getY()+660);
+		g.drawString("Y", (int)energyMeter.getX()+10, (int)energyMeter.getY()+750);
+
 	}
 
 	public static boolean isFrozen(){ return frozen; }
