@@ -1,9 +1,17 @@
-A simple puzzle based game; you have the ability to teleport short distances and stop time, 
-however both of these actions consume energy, which slowly regenerates over time.
+# Hack.UVA 2017 Project
 
-The game will start slowly, but the longer you play the faster enemies will start to appear; the goal
-is to reach the end of the level before you are overwhelmed. In the time I had I was only able to 
-implement two types of enemies: one that chases you around and another that stays stationary and
-fires projectiles in your direction.
+### Description
 
-In time I should be able to implement a larger variety of enemies and challenges, as well as more interesting puzzles.
+A puzzle-solving game, the goal is to solve each room's puzzle and continue to the next room before you are overwhelmed by enemies; 
+the longer you spend in a room the faster enemies will start to appear
+
+### Controls
+
+The player character will follow the mouse cursor around the screen
+
+*Mouse Click*
+	- Teleport to the position of the mouse cursor
+	- Teleporting further costs more energy, the energy bar will highlight red to show how much energy you will lose if
+	  you teleport to the current position of the cursor
+*Spacebar*
+	- Stop time; has a heavy energy cost
